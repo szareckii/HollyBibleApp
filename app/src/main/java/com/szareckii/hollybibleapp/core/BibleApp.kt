@@ -1,6 +1,9 @@
 package com.szareckii.hollybibleapp.core
 
 import android.app.Application
+import com.szareckii.hollybibleapp.data.BooksRepository
+import com.szareckii.hollybibleapp.domain.BaseBookDataToDomainMapper
+import com.szareckii.hollybibleapp.domain.BooksInteractor
 import com.szareckii.hollybibleapp.data.BooksCloudDataSource
 import com.szareckii.hollybibleapp.data.BooksCloudMapper
 import com.szareckii.hollybibleapp.data.BooksRepository
@@ -37,5 +40,6 @@ class BibleApp : Application() {
             booksCloudMapper,
             booksCacheMapper,
         )
+        val booksInteractor = BooksInteractor.Base(booksRepository, BaseBookDataToDomainMapper())
     }
 }
