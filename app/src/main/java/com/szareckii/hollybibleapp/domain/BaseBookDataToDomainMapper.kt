@@ -5,7 +5,6 @@ import com.szareckii.hollybibleapp.data.BooksDataToDomainMapper
 
 class BaseBookDataToDomainMapper : BooksDataToDomainMapper {
 
-    override fun map(books: List<Book>) = BookDomain.Success(books)
-
-    override fun map(e: Exception) = BookDomain.Fail(e)
+    override fun map(books: List<Book>) = BooksDomain.Success(books)
+    override fun map(e: Exception) = BooksDomain.Fail(e)
 }

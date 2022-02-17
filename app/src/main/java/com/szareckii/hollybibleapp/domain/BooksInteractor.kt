@@ -2,11 +2,10 @@ package com.szareckii.hollybibleapp.domain
 
 import com.szareckii.hollybibleapp.data.BooksDataToDomainMapper
 import com.szareckii.hollybibleapp.data.BooksRepository
-import com.szareckii.hollybibleapp.presentation.BooksUi
 
 interface BooksInteractor {
 
-    suspend fun fetchBooks(): BookDomain
+    suspend fun fetchBooks(): BooksDomain
 
     class Base(
         private val booksRepository: BooksRepository,
