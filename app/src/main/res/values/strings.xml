@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HollyBibleApp</string>
+    <string name="no_connection_message">No connection</string>
+    <string name="service_unavailable_message">Service unavailable</string>
+    <string name="sometring_when_wrong">Sometring when wrong</string>
 </resources>
