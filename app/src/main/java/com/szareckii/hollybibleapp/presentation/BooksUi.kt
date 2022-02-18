@@ -5,12 +5,12 @@ import com.szareckii.hollybibleapp.core.Abstract
 import com.szareckii.hollybibleapp.core.Book
 import com.szareckii.hollybibleapp.domain.ErrorType
 
-sealed class BooksUI : Abstract.Object<Unit, Abstract.Mapper.Empty>() {
+sealed class BooksUi : Abstract.Object<Unit, Abstract.Mapper.Empty>() {
 
     class Success(
         private val communication: BooksCommunication,
         private val books: List<Book>
-    ) : BooksUI() {
+    ) : BooksUi() {
         override fun map(mapper: Abstract.Mapper.Empty) = communication.show(books)
     }
 
@@ -18,7 +18,7 @@ sealed class BooksUI : Abstract.Object<Unit, Abstract.Mapper.Empty>() {
         private val communication: BooksCommunication,
         private val errorType: ErrorType,
         private val resourceProvider: ResourceProvider
-    ) : BooksUI() {
+    ) : BooksUi() {
         override fun map(mapper: Abstract.Mapper.Empty) {
             val messageId = when (errorType) {
                 ErrorType.NO_CONNECTION -> R.string.no_connection_message

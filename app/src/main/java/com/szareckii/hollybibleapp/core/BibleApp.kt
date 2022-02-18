@@ -6,7 +6,6 @@ import com.szareckii.hollybibleapp.domain.BaseBookDataToDomainMapper
 import com.szareckii.hollybibleapp.domain.BooksInteractor
 import com.szareckii.hollybibleapp.data.BooksCloudDataSource
 import com.szareckii.hollybibleapp.data.BooksCloudMapper
-import com.szareckii.hollybibleapp.data.BooksRepository
 import com.szareckii.hollybibleapp.data.cache.BookCacheMapper
 import com.szareckii.hollybibleapp.data.cache.BooksCacheDataSource
 import com.szareckii.hollybibleapp.data.cache.BooksCacheMapper
@@ -14,11 +13,11 @@ import com.szareckii.hollybibleapp.data.cache.RealmProvider
 import com.szareckii.hollybibleapp.data.net.BookCloudMapper
 import com.szareckii.hollybibleapp.data.net.BooksService
 import retrofit2.Retrofit
-import com.szareckii.hollybibleapp.domain.BooksInteractor
 import com.szareckii.hollybibleapp.presentation.BaseBooksDomainToUiMapper
 import com.szareckii.hollybibleapp.presentation.BooksCommunication
 import com.szareckii.hollybibleapp.presentation.MainViewModel
 import com.szareckii.hollybibleapp.presentation.ResourceProvider
+import io.realm.Realm
 
 class BibleApp : Application() {
 
@@ -30,6 +29,7 @@ class BibleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        Realm.init(this)
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .build()
@@ -47,14 +47,12 @@ class BibleApp : Application() {
             booksCacheMapper,
         )
         val booksInteractor = BooksInteractor.Base(booksRepository, BaseBookDataToDomainMapper())
+        val communication = BooksCommunication.Base()
 
         mainViewModel = MainViewModel(
             booksInteractor,
-            BaseBooksDomainToUiMapper(
-                BooksCommunication.Base(),
-                ResourceProvider.Base(this)
-            ),
-            BooksCommunication.Base(),
+            BaseBooksDomainToUiMapper(communication, ResourceProvider.Base(this)),
+            communication
         )
     }
 }

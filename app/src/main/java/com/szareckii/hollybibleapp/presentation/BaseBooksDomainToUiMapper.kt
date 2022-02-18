@@ -10,7 +10,7 @@ class BaseBooksDomainToUiMapper(
 ) :
     BooksDomainToUiMapper {
 
-    override fun map(books: List<Book>) = BooksUI.Success(communication, books)
+    override fun map(books: List<Book>) = BooksUi.Success(communication, books)
 
-    override fun map(errorType: ErrorType) = BooksUI.Fail(communication, errorType, resourceProvider)
+    override fun map(errorType: ErrorType) = BooksUi.Fail(communication, errorType, resourceProvider)
 }
